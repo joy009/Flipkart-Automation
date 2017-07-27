@@ -1,0 +1,10 @@
+*.pyc
+.project
+.pydevproject
+bin/
+build/
+dist/
+*.log
+*.png
+venv
+.idea

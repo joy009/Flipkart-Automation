@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<testsuite errors="1" failures="0" name="tests.test_add_item_and_verify.TestCases-20170727153146" tests="1" time="22.934">
+	<testcase classname="tests.test_add_item_and_verify.TestCases" name="test_search_and_add_item_and_verify_in_cart" time="22.934">
+		<error message="'Yes' != 'No'" type="AssertionError">
+<![CDATA[Traceback (most recent call last):
+  File "C:\Users\Joydeep\flipkart-automation\tests\test_add_item_and_verify.py", line 15, in test_search_and_add_item_and_verify_in_cart
+    self.assertEquals(current_page.get_greet_user_text(GREET_USER_TEXT), "No")
+AssertionError: 'Yes' != 'No'
+]]>		</error>
+	</testcase>
+	<system-out>
+<![CDATA[]]>	</system-out>
+	<system-err>
+<![CDATA[]]>	</system-err>
+</testsuite>

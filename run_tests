@@ -1,0 +1,44 @@
+#!/usr/bin/env python
+
+from myflipkart.common.constants import SUMMARY_REPORT_NAME, FULL_REPORT_NAME, XML_REPORT_NAME
+from myflipkart.logging.logger import LOGGER
+from myflipkart.summary_report import create_summary_report
+from myflipkart.full_report import create_full_report
+from tests import all_tests
+import xmlrunner
+from datetime import datetime
+
+if __name__ == "__main__":
+
+    start_time = datetime.now()
+    file_handler = file(XML_REPORT_NAME, "w+")
+    result = xmlrunner.XMLTestRunner(file_handler).run(all_tests())
+    end_time = datetime.now()
+    file_handler.close()
+
+    total = result.testsRun
+    successful = result.testsRun - len(result.errors) - len(result.failures) - len(result.skipped)
+    failures = len(result.failures)
+    errors = len(result.errors)
+    skipped = len(result.skipped)
+
+    LOGGER.info("Generating full html report file with name as " +
+                FULL_REPORT_NAME)
+    create_full_report(FULL_REPORT_NAME, XML_REPORT_NAME, start_time,
+                       end_time, successful, failures, errors)
+    LOGGER.info("Generated full html report file successfully")
+
+    LOGGER.info("Generating summary html report file with name as " +
+                SUMMARY_REPORT_NAME)
+    create_summary_report(SUMMARY_REPORT_NAME,
+                          [total, successful, failures, errors, skipped])
+    LOGGER.info("Generated summary html report file successfully")
+
+    LOGGER.info("=" * 50)
+    LOGGER.info("-------TEST RESULTS SUMMARY REPORT-------")
+    LOGGER.info("Total      = " + str(total))
+    LOGGER.info("Successful = " + str(successful))
+    LOGGER.info("Failures   = " + str(failures))
+    LOGGER.info("Errors     = " + str(errors))
+    LOGGER.info("Skipped    = " + str(skipped))
+    LOGGER.info("-----------END OF TEST RESULTS-----------")
